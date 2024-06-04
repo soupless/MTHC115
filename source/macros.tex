@@ -1,0 +1,119 @@
+\usepackage{
+    enumitem,
+    amsmath, amsthm, amssymb,
+    geometry,
+    fancyhdr,
+    marginnote,
+    titlesec,
+    indentfirst,
+    parskip,
+    hyperref,
+    thmbox, 
+    graphicx,
+	  mathtools,
+    setspace
+    % pgfplots, tikz
+}
+
+\allowdisplaybreaks
+\onehalfspacing
+
+% geometry package
+\geometry{
+    paper=a4paper,
+    twoside,
+    outer=1in,
+    top=1.25in,
+    bottom=1.25in,
+    inner=1.3in,
+    % showframe
+} 
+
+% fancyhdr package
+\pagestyle{fancy}
+
+\renewcommand{\sectionmark}[1]{\markboth{}{Lecture \thesection: #1}}
+
+\setlength{\headheight}{13.6pt}
+\fancyhead[RO, LE]{\textrm{\rightmark}}
+\fancyhead[LO, RE]{\leftmark}
+\renewcommand{\headrulewidth}{0.75pt}
+\renewcommand{\footrulewidth}{0.75pt}
+
+% titlesec package
+\titleformat{\section}{\Large\bfseries}{Lecture~\thesection:}{1ex}{}
+
+% parskip package
+\setlength{\parindent}{0.25in}
+\setlength{\parskip}{10pt}
+
+% hyperref package
+\hypersetup{
+    colorlinks,
+    pdftitle=Linear Algebra,
+    pdfauthor=Kevin,
+}
+
+
+% misc
+
+\renewcommand{\emph}{\textsl}
+
+\setcounter{tocdepth}{1}
+\newcommand\xqed[1]{%
+\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
+\quad\hbox{#1}}
+\newcommand\quod{\xqed{$\square$}}
+
+\newenvironment{solution}[1][\undefined]
+  {\ifx\undefined#1 Solution:\ \else Solution #1:\ \fi}
+  {\quod}
+\newenvironment{recall}
+  {\noindent\small\textbf{Recall :}\ \normalfont}
+  {}
+
+\counterwithin{figure}{section}
+% \counterwithin{footnote}{chapter}
+
+\makeatletter
+\let\oldref=\ref
+\def\ref#1{\ifcsname r@#1\endcsname \oldref{#1}\else #1\fi}
+\makeatother
+
+\newcommand\fnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\newcommand{\lowerparen}[2]{%
+  \raisebox{-#1}{\(\displaystyle\left(\raisebox{#1}{\(\displaystyle #2\)}\right)\)}}
+
+\newcommand{\sectionbreak}{\clearpage}
+
+% Math commands and environments
+% \renewenvironment{bmatrix}[1][r]{\begin{bmatrix*}[#1]}{\end{bmatrix*}}
+\newtheorem[M]{thm}{Theorem}[section]
+\newtheorem[M]{dfn}{Definition}[section]
+\newtheorem[S]{note}{Note}[section]
+
+\thmboxoptions{cut=true, bodystyle=\normalfont, leftmargin=7mm, rightmargin=5mm, headstyle={#1 #2 \normalfont}, titlestyle={ (#1)}, vskip=1.5mm}
+
+\newcommand{\rtypeI}[2]{#1 \leftrightarrow #2}
+\newcommand{\rtypeII}[2]{#1#2 \to #2}
+\newcommand{\rtypeIII}[2]{#1 + #2 \to #2}
+
+\newcommand{\typeI}[3]{#1_{\rtypeI{#2}{#3}}}
+\newcommand{\typeII}[3]{#1_{\rtypeII{#2}{#3}}}
+\newcommand{\typeIII}[3]{#1_{\rtypeIII{#2}{#3}}}
+
+\newcommand{\requiv}{\stackrel{\text{row}}{\sim}}
+\newcommand{\cequiv}{\stackrel{\text{col}}{\sim}}
+% \renewcommand{\implies}{\Rightarrow}
+
+\newcommand{\real}{\mathbb{R}}
+
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\Tr}{Tr}

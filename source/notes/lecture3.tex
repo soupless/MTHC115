@@ -1,0 +1,138 @@
+\section{Matrix operations, part 3}
+    \renewcommand{\leftmark}{August 16, 2023}
+
+    Recall that a system of \(m\) linear equations of \(n\) unknowns \((x_1, x_2, \ldots, x_n)\) is written as
+    \[\renewcommand{\arraystretch}{1.15}\left.\begin{array}{ccccccccc}
+        a_{11}x_1 &+& a_{12}x_2 &+& \cdots &+& a_{1n}x_n &=& b_1 \\
+        a_{21}x_1 &+& a_{22}x_2 &+& \cdots &+& a_{2n}x_n &=& b_2 \\
+        \vdots &\phantom{+}& \vdots &\phantom{+}& \ddots &\phantom{+}& \vdots &\phantom{=}& \vdots \\
+        a_{m1}x_1 &+& a_{m2}x_2 &+& \cdots &+& a_{mn}x_n &=& b_m \\
+    \end{array}\right\}.\]
+
+    Let
+    \begin{align*}
+        A &= \begin{bmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            a_{21} & a_{22} & \cdots & a_{2n} \\
+            \,\vdots & \,\vdots & \ddots & \,\vdots \\
+            a_{m1} & a_{m2} & \cdots & a_{mn}
+        \end{bmatrix} \\
+        \mathbf{x} &= \begin{bmatrix}
+            x_1 \\ x_2 \\ \,\vdots \\ x_n
+        \end{bmatrix} \\
+        b &= \begin{bmatrix}
+            b_1 \\ b_2 \\ \,\vdots \\ b_n
+        \end{bmatrix}
+    \end{align*}
+    be the coefficient matrix, unknown matrix, and the constant matrix, respectively. Then, we can write the system as \(A\mathbf{x} = b\).
+
+    We can also write the system in the form 
+    \begin{align*}
+        \begin{bmatrix}
+            a_{11}x_1 \\ a_{21}x_{1} \\ \,\vdots \\ a_{m1}x_1
+        \end{bmatrix} + \begin{bmatrix}
+            a_{12}x_2 \\ a_{22}x_{2} \\ \,\vdots \\ a_{m2}x_2
+        \end{bmatrix} + \cdots + \begin{bmatrix}
+            a_{1n}x_n \\ a_{2n}x_{n} \\ \,\vdots \\ a_{mn}x_n
+        \end{bmatrix} &= \begin{bmatrix}
+            b_1 \\ b_2 \\ \,\vdots \\ b_m
+        \end{bmatrix} \\
+        x_1\begin{bmatrix}
+            a_{11} \\ a_{21} \\ \,\vdots \\ a_{m1}
+        \end{bmatrix} + x_2\begin{bmatrix}
+            a_{12} \\ a_{22} \\ \,\vdots \\ a_{m2}
+        \end{bmatrix} + \cdots + x_n\begin{bmatrix}
+            a_{1n} \\ a_{2n} \\ \,\vdots \\ a_{mn}
+        \end{bmatrix} &= \begin{bmatrix}
+            b_1 \\ b_2 \\ \,\vdots \\ b_m
+        \end{bmatrix}
+    \end{align*}
+
+    \begin{example}
+        Consider the system
+        \[\left.\begin{aligned}
+            10x_1 - 2x_2 + x_3 + x_4 &= 5 \\
+            7x_1 + x_2 - x_4 &= 7 \\
+            2x_1 + 9x_2 + 4x_3 &= -1
+        \end{aligned}\right\}\]
+    \end{example}
+    In matrix form, we can write this as
+    \begin{align*}
+        \begin{bmatrix}
+            10 & -2 & 1 & 1 \\
+            7 & 1 & 0 & -1 \\
+            2 & 9 & 4 & 0 
+        \end{bmatrix}\begin{bmatrix}
+            x_1 \\ x_2 \\ x_3 \\ x_4
+        \end{bmatrix} = \begin{bmatrix}
+            5 \\ 7 \\ -1
+        \end{bmatrix}.
+    \end{align*}
+
+    \begin{dfn}[Augmented matrix]
+        For a system of \(m\) linear equations with \(n\) unknowns, we can implicitly drop the unknown matrix and have a representation for the system by an augmented matrix, that is, we use only the coefficient and constant matrices and write it in the form
+
+        \[\left[\begin{array}{cccc|c}
+            a_{11} & a_{12} & \cdots & a_{1n} & b_1 \\
+            a_{21} & a_{21} & \cdots & a_{2n} & b_2 \\
+            \vdots & \vdots & \ddots & \vdots & \vdots \\
+            a_{m1} & a_{m2} & \cdots & a_{mn} & b_{m}
+        \end{array}\right].\]
+    \end{dfn}
+
+    \begin{dfn}[Trace]
+        Let \(A\) be a square matrix of order \(n\). The trace of \(A\), denoted by \(\Tr(A)\), is defined as \[\Tr(A) = \sum_{i = 1}^n a_{ii}.\]
+    \end{dfn}
+
+    \begin{thm}
+        Let \(A\) and \(B\) be square matrices of order \(n\), and \(r\) be a real number. Then,
+        \begin{itemize}
+            \item \(\Tr(rA) = r \Tr(A)\),
+            \item \(\Tr(A + B) = \Tr(A) + \Tr(B)\),
+            \item \(\Tr(A) = \Tr(A^T)\),
+            \item \(\Tr(AB) = \Tr(BA)\).
+        \end{itemize}
+    \end{thm}
+
+    \begin{proof}
+        Let \(C = rA\). Then, \(c_{ij} = ra_{ij}\) for all \(i, j\). Also,
+        \begin{align*}
+            rA &= C \\
+            \Tr(rA) &= \Tr(C) \\
+            \Tr(rA) &= \sum_{i = 1}^n c_{ii} \\
+            \Tr(rA) &= \sum_{i = 1}^n ra_{ii} \\
+            \Tr(rA) &= r \sum_{i = 1}^n a_{ii} \\
+            \Tr(rA) &= r \Tr(A)
+        \end{align*}
+    \end{proof}
+
+    \begin{proof}
+        It is clear that the \((i,j)\) entry of \(A + B\) is \(a_{ij} + b_{ij}\). Then,
+        \begin{align*}
+            \Tr(A + B) &= \sum_{i = 1}^n (a_{ii} + b_{ii}) \\
+            \Tr(A + B) &= \sum_{i = 1}^n a_{ii} + \sum_{i = 1}^n b_{ii} \\
+            \Tr(A + B) &= \Tr(A) + \Tr(B)
+        \end{align*}
+    \end{proof}
+
+    \begin{proof}
+        The \((i, j)\) entry of \(A\) is the \((j, i)\) entry of \(A^T\). Hence, the \((i, i)\) entry of \(A\) is the \((i, i)\) entry of \(A^T\), which is the same. 
+        \begin{align*}
+            \Tr(A^T) &= \sum_{i = 1}^n a^T_{ii} \\
+            \Tr(A^T) &= \sum_{i = 1}^n a_{ii} \\
+            \Tr(A^T) &= \Tr(A)
+        \end{align*}
+    \end{proof}
+
+    \begin{proof}
+        We first prove that \[\sum_{i = 1}^m \sum_{j = 1}^{n} a_{ij} = \sum_{j = 1}^n \sum_{i = 1}^m a_{ij}\] for finite natural numbers \(m, n\) and for real numbers \(a_{ij}\). We interpret this as having the \(m \times n\) matrix \(A\), and we get the sum of all the entries. One way is to get the sum of each row, then get the sum of these sums. This would be \(\displaystyle \sum_{i = 1}^m \sum_{j = 1}^n a_{ij}\). Another way would be to get the sum of each column, then get the sum of these sums, which would be \(\displaystyle \sum_{j = 1}^n \sum_{i = 1}^m a_{ij}\). Since we are adding real numbers, addition should be commutative. Hence, \(\displaystyle \sum_{i = 1}^m \sum_{j = 1}^{n} a_{ij} = \sum_{j = 1}^n \sum_{i = 1}^m a_{ij}\).
+
+        Then,
+        \begin{align*}
+            \Tr(AB) &= \sum_{i = 1}^n (AB)_{ii} \\
+            \Tr(AB) &= \sum_{i = 1}^n \sum_{j = 1}^n a_{ij}b_{ji} \\
+            \Tr(AB) &= \sum_{j = 1}^n \sum_{i = 1}^n  b_{ji}a_{ij} \\
+            \Tr(AB) &= \sum_{j = 1}^n (BA)_{jj} \\
+            \Tr(AB) &= \Tr(BA)
+        \end{align*}
+    \end{proof}

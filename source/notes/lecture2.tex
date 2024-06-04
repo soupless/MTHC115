@@ -1,0 +1,194 @@
+\section{Matrix operations, part 2}
+    \renewcommand{\leftmark}{August 14, 2023}
+
+    \begin{dfn}[Transpose]
+        Let \(A = [a_{ij}]\) be an \(m \times n\) matrix. The transpose of \(A\), denoted by \(A^{T}\), is the \(n \times m\) matrix \(C = [c_{ij}]\) such that \(c_{ij} = a_{ji}\) for all \(i, j\).
+    \end{dfn}
+
+    \begin{example}
+        \[A = \begin{bmatrix}
+            1 & 0 & 2 \\ 4 & 1 & 5
+        \end{bmatrix} \implies A^T = \begin{bmatrix}
+            1 & 4 \\ 0 & 1 \\ 2 & 5
+        \end{bmatrix}\]
+
+        \[B = \begin{bmatrix}
+            3 & 6 & 9 & 12
+        \end{bmatrix} \implies B^T = \begin{bmatrix}
+            3 \\ 6 \\ 9 \\ 12
+        \end{bmatrix}.\]
+    \end{example}
+
+    \begin{dfn}[Set of \(n\)-vectors]
+        We define \(\real^n\) as the set of \(n\)-vectors over \(R\), that is, \[\real^n = \left\{\left.\begin{bmatrix}
+            u_1 \\ u_2 \\ \,\vdots \\ u_n
+        \end{bmatrix}\right| \,u_i \in\real \text{ for } 1 \leq i \leq n\right\}\]
+    \end{dfn}
+
+    \begin{dfn}[Dot product]
+        Let \(u,v\in\real^n\). The dot product of \(u\) and \(v\), denoted by \(u \cdot v\), is defined by \[c = u_1v_1 + u_2v_2 + \cdots + u_nv_n\] or more compactly, \[c = \sum_{i = 1}^n u_iv_i.\]
+    \end{dfn}
+
+    \begin{example}
+        Let \(u = \begin{bmatrix}
+            -1 \\ 1 \\ -1 \\ 1
+        \end{bmatrix}\) and \(v = \begin{bmatrix}
+            1 \\ -1 \\ 1 \\ -1
+        \end{bmatrix}\). Then,
+        \begin{align*}
+            u \cdot v &= (-1)(1) + (1)(-1) + (-1)(1) + (1)(-1) \\
+            u \cdot v &= -4.
+        \end{align*}
+    \end{example}
+
+    \begin{example}
+        Let \(u = \begin{bmatrix}
+            \sin\theta \\ \cos\theta
+        \end{bmatrix}\) for some real number \(\theta\). Then,
+        \begin{align*}
+            u \cdot u &= \sin^2\theta + \cos^2\theta \\
+            u \cdot u &= 1
+        \end{align*}
+    \end{example}
+
+    \begin{thm}
+        Let \(u \in \real^n\). Then, \(u \cdot u \geq 0\).
+    \end{thm}
+
+    \begin{proof}
+        Let \(u = \begin{bmatrix}
+            u_1 \\ u_2 \\ \,\vdots \\ u_n
+        \end{bmatrix}\). Then, \(u \cdot u = u_1^2 + u_2^2 + \cdots + u_n^2\)
+        Since \(u_i\) is a real number, then \(u_i^2 \geq 0\) for all \(i\). Then, \(u_1^2 + u_2^2 + \cdots + u_n^2 \geq 0\), hence \(u \cdot u \geq 0\).
+    \end{proof}
+
+    \begin{dfn}[Matrix multiplication]
+        Let \(A = [a_{ij}]\) be an \(m \times p\) matrix, and let \(B = [b_{ij}]\) be a \(p \times n\) matrix. The product of \(A\) and \(B\), denoted by \(AB\), is the \(m \times n\) matrix \(C = [c_{ij}]\) where \[c_{ij} = \sum_{k = 1}^p a_{ik}b_{kj}.\]
+    \end{dfn}
+
+    A more concise way to keep it in mind is to set the \((i, j)\) entry of \(AB\) as \(\row_i(A)^T \cdot \col_j(B)\).
+
+    \begin{example}
+        Let \(A = \begin{bmatrix}
+            1 & 1 & -2 \\ 0 & 3 & 4
+        \end{bmatrix}\) and \(B = \begin{bmatrix}
+            0 & 2 \\ 0 & 4 \\ 1 & 6
+        \end{bmatrix}\). We can see that \(A\) is of size \(2 \times 3\) and \(B\) is of size \(3 \times 2\). Hence, \(AB\) will be of size \(2 \times 2\). Then,
+        \begin{align*}
+            AB &= \begin{bmatrix}
+                1(0) + (-1)(0) + (-2)(1) & 1(2) + (-1)(4) + (-2)(6) \\
+                0(0) + 3(0) + 4(1) & 0(2) + 3(4) + 4(6)
+            \end{bmatrix} \\
+            AB &= \begin{bmatrix}
+                -2 & -6 \\
+                4 & 36
+            \end{bmatrix}
+        \end{align*}
+    \end{example}
+
+    \begin{example}
+        \mbox{}
+
+        \begin{enumerate}
+            \item If \(u = \begin{bmatrix}
+                x \\ 3 \\ 4
+            \end{bmatrix}\) and \(u \cdot u = 50\), find the values of \(x\).
+            \begin{align*}
+                u \cdot u &= 50 \\
+                x^2 + 3^2 + 4^2 &= 50 \\
+                x^2 + 9 + 16 &= 50 \\
+                x^2 &= 25 \\
+                x &= \pm 5
+            \end{align*}
+
+            \item Let \(A = \begin{bmatrix}
+                1 & 2 & x \\ 3 & -1 & 2
+            \end{bmatrix}\) and \(B = \begin{bmatrix}
+                y \\ x \\ 1
+            \end{bmatrix}\). If \(AB = \begin{bmatrix}
+                6 \\ 8
+            \end{bmatrix}\), find \(x\) and \(y\).
+
+            \begin{align*}
+                AB &= \begin{bmatrix}
+                    6 \\ 8
+                \end{bmatrix} \\
+                \begin{bmatrix}
+                    1 & 2 & x \\ 3 & -1 & 2
+                \end{bmatrix}\begin{bmatrix}
+                    y \\ x \\ 1
+                \end{bmatrix} &= \begin{bmatrix}
+                    6 \\ 8
+                \end{bmatrix} \\
+                \begin{bmatrix}
+                    y + 2x + x \\ 3y - x + 2
+                \end{bmatrix} &= \begin{bmatrix}
+                    6 \\ 8
+                \end{bmatrix} \\
+                \begin{bmatrix}
+                    y + 3x \\ 3y - x + 2
+                \end{bmatrix} &= \begin{bmatrix}
+                    6 \\ 8
+                \end{bmatrix}
+            \end{align*}
+            We get the system of linear equations
+            \[\begin{cases}
+                y + 3x &= 6 \\
+                3y - x + 2 &= 8
+            \end{cases}\]
+
+            We solve this by elimination method:
+            \begin{align*}
+                3y - x + 2 &= 8 \\
+                3y - x &= 6 \\
+                9y - 3x &= 18 \\
+                (y + 3x) + (9y - 3x) &= 6 + 18 \\
+                10y &= 24 \\
+                y &= \frac{12}{5} \\\\
+                y + 3x &= 6 \\
+                \frac{12}{5} + 3x &= 6 \\
+                \frac{4}{5} + x &= 2 \\
+                x &= \frac{6}{5}
+            \end{align*}
+            Hence, \(x = \frac{6}{5}\) and \(y = \frac{12}{5}\).
+
+            \item Let \(A = \begin{bmatrix}
+                4 & 1 & -7 \\ 1 & 1 & -2 \\ -3 & 4 & 6
+            \end{bmatrix}\) and \(B = \begin{bmatrix}
+                1 & -5 \\ 1 & 7 \\ 0 & 8
+            \end{bmatrix}\). Find \(AB\).
+            \begin{align*}
+                AB &= \begin{bmatrix}
+                    4 & 1 & -7 \\ 1 & 1 & -2 \\ -3 & 4 & 6
+                \end{bmatrix}\begin{bmatrix}
+                    1 & -5 \\ 1 & 7 \\ 0 & 8
+                \end{bmatrix} \\
+                AB &= \begin{bmatrix}
+                    4(1) + (-1)(1) + 7(0) & 4(-5) + (-1)(7) + 7(8) \\
+                    1(1) + 1(1) + (-2)(0) & 1(-5) + 1(7) + (-2)(8) \\
+                    (-3)(1) + 4(1) + 6(0) & (-3)(-5) + 4(7) + 6(8)
+                \end{bmatrix} \\
+                AB &= \begin{bmatrix}
+                    3 & 29 \\ 2 & -14 \\ 1 & 0
+                \end{bmatrix}
+            \end{align*}
+
+            \item Let \(A = [a_{ij}]\) be a \(10 \times 10\) matrix where \(a_{ij} =  i\) for \(i = 1, 2, \ldots, 10\). Find the \((8, 9)\) entry of \(AA\).
+
+            Let \(x\) be the \((8, 9)\) entry of \(AA\). Then,
+            \begin{align*}
+                x &= \row_8(A)^T \cdot \col_9(A) \\
+                x &= \begin{bmatrix}
+                    8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8
+                \end{bmatrix}^T \cdot \begin{bmatrix}
+                    1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 \\ 8 \\ 9 \\ 10
+                \end{bmatrix} \\
+                x &= 8(1) + 8(2) + 8(3) + 8(4) + 8(5) + 8(6) + 8(7) + 8(8) + 8(9) + 8(10) \\
+                x &= 440
+            \end{align*}
+        \end{enumerate}
+    \end{example}
+
+    \begin{note}
+        We use the notation \(A^k\) to mean \(\underbrace{AA\cdots A}_{k \text{ times}}\), and is only valid if \(A\) is square.
+    \end{note}
